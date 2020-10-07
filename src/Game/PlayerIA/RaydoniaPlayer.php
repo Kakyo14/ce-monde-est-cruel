@@ -17,32 +17,37 @@ class RaydoniaPlayer extends Player
 
     public function getChoice()
     {
-        // -------------------------------------    -----------------------------------------------------
-        // How to get my Last Choice           ?    $this->result->getLastChoiceFor($this->mySide) -- if 0 (first round)
-        // How to get the opponent Last Choice ?    $this->result->getLastChoiceFor($this->opponentSide) -- if 0 (first round)
-        // -------------------------------------    -----------------------------------------------------
-        // How to get my Last Score            ?    $this->result->getLastScoreFor($this->mySide) -- if 0 (first round)
-        // How to get the opponent Last Score  ?    $this->result->getLastScoreFor($this->opponentSide) -- if 0 (first round)
-        // -------------------------------------    -----------------------------------------------------
-        // How to get all the Choices          ?    $this->result->getChoicesFor($this->mySide)
-        // How to get the opponent Last Choice ?    $this->result->getChoicesFor($this->opponentSide)
-        // -------------------------------------    -----------------------------------------------------
-        // How to get my Last Score            ?    $this->result->getLastScoreFor($this->mySide)
-        // How to get the opponent Last Score  ?    $this->result->getLastScoreFor($this->opponentSide)
-        // -------------------------------------    -----------------------------------------------------
-        // How to get the stats                ?    $this->result->getStats()
-        // How to get the stats for me         ?    $this->result->getStatsFor($this->mySide)
-        //          array('name' => value, 'score' => value, 'friend' => value, 'foe' => value
-        // How to get the stats for the oppo   ?    $this->result->getStatsFor($this->opponentSide)
-        //          array('name' => value, 'score' => value, 'friend' => value, 'foe' => value
-        // -------------------------------------    -----------------------------------------------------
-        // How to get the number of round      ?    $this->result->getNbRound()
-        // -------------------------------------    -----------------------------------------------------
-        // How can i display the result of each round ? $this->prettyDisplay()
-        // -------------------------------------    -----------------------------------------------------
 
+        $last_choice = $this->result->getLastChoiceFor($this->mySide);
+        $last_opp_choice = $this->result->getLastChoiceFor($this->opponentSide);
 
-        return parent::rockChoice();
+        $last_score = $this->result->getLastScoreFor($this->mySide);
+        $last_opp_score = $this->result->getLastScoreFor($this->opponentSide);
+
+        $all_choices = $this->result->getChoicesFor($this->mySide);
+        $opp_last_choice = $this->result->getChoicesFor($this->opponentSide);
+
+        $my_last_score = $this->result->getLastScoreFor($this->mySide);
+        $opp_last_score = $this->result->getLastScoreFor($this->opponentSide);
+
+        $stats = $this->result->getStats();
+        $my_stats = $this->result->getStatsFor($this->mySide);
+        $opp_stats = $this->result->getStatsFor($this->opponentSide);
+
+        $number_of_rounds = $this->result->getNbRound();
+
+        //$this->prettyDisplay();
+
+        if (!strcmp($last_opp_choice,'rock')) {
+            return parent::paperChoice();
+        }
+        elseif (!strcmp($last_opp_choice,'paper')){
+            return parent::scissorsChoice();
+        }
+        else{
+            return parent::rockChoice();
+        }
+        //var_dump($all_choices);
 
     }
 };
