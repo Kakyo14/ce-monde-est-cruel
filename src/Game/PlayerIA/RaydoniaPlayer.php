@@ -38,8 +38,10 @@ class RaydoniaPlayer extends Player
 
         //$this->prettyDisplay();
         //var_dump($opp_stats);
-        //var_dump($stats);
+        var_dump($stats);
         //var_dump($my_stats);
+
+
 
         $null_opp_stats = array_keys($opp_stats, 0);
         $null_opp_stats = array($null_opp_stats[1], $null_opp_stats[2]);
@@ -49,13 +51,13 @@ class RaydoniaPlayer extends Player
         $array_paper = array_keys($null_opp_stats, 'paper');
         //echo 'array_scissors';
         //var_dump($array_scissors);
-        if ((!strcmp($last_opp_choice,'rock')) && (sizeof($array_scissors) != sizeof($null_opp_stats))) {
+        if ((!strcmp($last_opp_choice,'rock')) && count($array_scissors) == 1) {
             return parent::paperChoice();
         }
-        elseif (!strcmp($last_opp_choice,'paper') && (sizeof($array_rock) != sizeof($null_opp_stats))){
+        elseif (!strcmp($last_opp_choice,'paper') && count($array_rock) == 1){
             return parent::scissorsChoice();
         }
-        elseif (!strcmp($last_opp_choice,'scissor') && (sizeof($array_paper) != sizeof($null_opp_stats))){
+        elseif (!strcmp($last_opp_choice,'scissor') && count($array_paper) == 1){
             return parent::rockChoice();
         }
 
