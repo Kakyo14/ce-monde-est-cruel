@@ -41,6 +41,8 @@ class RaydoniaPlayer extends Player
         var_dump($stats);
         //var_dump($my_stats);
 
+        var_dump($last_opp_score);
+
 
 
         $null_opp_stats = array_keys($opp_stats, 0);
@@ -61,18 +63,27 @@ class RaydoniaPlayer extends Player
             return parent::rockChoice();
         }
 
-        if (!strcmp($last_opp_choice,'rock')) {
+        if (!strcmp($last_opp_choice,'rock') && $opp_last_score != 0) {
             return parent::rockChoice();
         }
-        elseif (!strcmp($last_opp_choice,'paper')){
+        elseif (!strcmp($last_opp_choice,'paper') && $opp_last_score != 0){
             return parent::paperChoice();
         }
-        elseif (!strcmp($last_opp_choice,'scissor')){
+        elseif (!strcmp($last_opp_choice,'scissor') && $opp_last_score != 0){
             return parent::scissorsChoice();
         }
 
         //var_dump($all_choices);
 
+        if (!strcmp($last_opp_choice,'rock')) {
+            return parent::paperChoice();
+        }
+        elseif (!strcmp($last_opp_choice,'paper')){
+            return parent::scissorsChoice();
+        }
+        elseif (!strcmp($last_opp_choice,'scissor')){
+            return parent::rockChoice();
+        }
 
         return parent::paperChoice();
 
