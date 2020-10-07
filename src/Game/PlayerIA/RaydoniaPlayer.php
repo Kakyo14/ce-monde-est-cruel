@@ -7,7 +7,7 @@ use Hackathon\Game\Result;
 /**
  * Class RaydoniaPlayers
  * @package Hackathon\PlayerIA
- * @author YOUR NAME HERE
+ * @author Elodie Léger
  */
 class RaydoniaPlayer extends Player
 {
@@ -45,8 +45,14 @@ class RaydoniaPlayer extends Player
 
 
 
-        $null_opp_stats = array_keys($opp_stats, 0);
-        $null_opp_stats = array($null_opp_stats[1], $null_opp_stats[2]);
+        $null = array_keys($opp_stats, 0);
+
+        $null_opp_stats = [];
+
+        array_push($null_opp_stats, $null[1], $null[2]);
+        //var_dump($null_opp_stats);
+
+        //$null_opp_stats = array_merge($null_opp_stats[1], $null_opp_stats[2]);
         //var_dump($null_opp_stats);
         $array_scissors = array_keys($null_opp_stats, 'scissors');
         $array_rock = array_keys($null_opp_stats, 'rock');
@@ -76,24 +82,25 @@ class RaydoniaPlayer extends Player
         //var_dump($all_choices);
 
         if (!strcmp($last_choice ,'rock')) {
-            return parent::scissorsChoice();
+            if (strcmp($last_opp_choice,'scissor')) {
+                return parent::scissorsChoice();
+            }
+            return parent::paperChoice();
         }
         elseif (!strcmp($last_choice,'paper')){
-            return parent::rockChoice();
-        }
-        elseif (!strcmp($last_choice,'scissor')){
-            return parent::paperChoice();
-        }
-
-        if (!strcmp($last_opp_choice,'rock')) {
-            return parent::paperChoice();
-        }
-        elseif (!strcmp($last_opp_choice,'paper')){
+            if (strcmp($last_opp_choice,'rock')) {
+                return parent::rockChoice();
+            }
             return parent::scissorsChoice();
         }
-        elseif (!strcmp($last_opp_choice,'scissor')){
+        elseif (!strcmp($last_choice,'scissor')){
+            if (strcmp($last_opp_choice,'paper')) {
+                return parent::paperChoice();
+            }
             return parent::rockChoice();
         }
+
+        //$this->prettyDisplay();
 
         return parent::paperChoice();
 
