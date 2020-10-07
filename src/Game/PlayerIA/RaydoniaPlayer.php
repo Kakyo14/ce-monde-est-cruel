@@ -37,28 +37,25 @@ class RaydoniaPlayer extends Player
         $number_of_rounds = $this->result->getNbRound();
 
         //$this->prettyDisplay();
-        //var_dump($opp_stats);
-        //var_dump($stats);
-        //var_dump($my_stats);
-
-        //var_dump($last_opp_score);
 
 
-
+        //find keys for moves never used
         $null = array_keys($opp_stats, 0);
 
+        //new array
         $null_opp_stats = [];
 
-        array_push($null_opp_stats, $null[1], $null[2]);
-        //var_dump($null_opp_stats);
+        //remove name and put result in $null_opp_stats
+        if (!is_null($null) || !is_null($null[1]) || !is_null($null[2])) {
+            array_push($null_opp_stats, $null[1], $null[2]);
+        }
 
-        //$null_opp_stats = array_merge($null_opp_stats[1], $null_opp_stats[2]);
         //var_dump($null_opp_stats);
+        //create array with null moves if move not null, array contains all elements of $null_opt_stats
         $array_scissors = array_keys($null_opp_stats, 'scissors');
         $array_rock = array_keys($null_opp_stats, 'rock');
         $array_paper = array_keys($null_opp_stats, 'paper');
-        //echo 'array_scissors';
-        //var_dump($array_scissors);
+
         if ((!strcmp($last_opp_choice,'rock')) && count($array_scissors) == 1) {
             return parent::paperChoice();
         }
@@ -79,7 +76,7 @@ class RaydoniaPlayer extends Player
             return parent::scissorsChoice();
         }
 
-        //var_dump($all_choices);
+
 
         if (!strcmp($last_choice ,'rock')) {
             if (strcmp($last_opp_choice,'scissor')) {
