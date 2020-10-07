@@ -38,10 +38,10 @@ class RaydoniaPlayer extends Player
 
         //$this->prettyDisplay();
         //var_dump($opp_stats);
-        var_dump($stats);
+        //var_dump($stats);
         //var_dump($my_stats);
 
-        var_dump($last_opp_score);
+        //var_dump($last_opp_score);
 
 
 
@@ -74,6 +74,16 @@ class RaydoniaPlayer extends Player
         }
 
         //var_dump($all_choices);
+
+        if (!strcmp($last_choice ,'rock')) {
+            return parent::scissorsChoice();
+        }
+        elseif (!strcmp($last_choice,'paper')){
+            return parent::rockChoice();
+        }
+        elseif (!strcmp($last_choice,'scissor')){
+            return parent::paperChoice();
+        }
 
         if (!strcmp($last_opp_choice,'rock')) {
             return parent::paperChoice();
